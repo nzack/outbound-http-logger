@@ -1,0 +1,29 @@
+{
+  "name": "outbound-http-logger",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./index",
+  "scripts": {
+    "test": "mocha --recursive tests",
+    "test-debug": "mocha debug --recursive --timeout 9999999 tests"
+  },
+  "dependencies": {
+    "json-colorz": "^0.2.3",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "shimmer": "^1.1.0",
+    "uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.0",
+    "sinon": "^1.17.2"
+  },
+  "keywords": [
+    "http",
+    "request",
+    "log",
+    "outbound"
+  ],
+  "license": "MIT"
+}
