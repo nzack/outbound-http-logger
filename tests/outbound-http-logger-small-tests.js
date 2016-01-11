@@ -1,12 +1,22 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 var assert = require('chai').assert;
+var fs = require('fs');
 var http = require('http');
+var https = require('https');
+var url = require('url');
+var request = require('superagent');
+
+require('longjohn');
 
 const OutboundHttpLogger = require('../lib/outbound-http-logger');
 
 describe('Outbound HTTP Logger Tests', function() {
-  var server = http.createServer();
+  var server;
+  var sslServer;
 
   before(function(done) {
+    server = http.createServer();
     server.listen(9000, function() {
       done();
     });
@@ -16,6 +26,28 @@ describe('Outbound HTTP Logger Tests', function() {
       res.writeHead(200, {});
       res.end();
     });
+  });
+
+  before(function(done) {
+    var options = {
+      key: fs.readFileSync('./server/rsa-server.key'),
+      cert: fs.readFileSync('./server/rsa-server.crt')
+    };
+    sslServer = https.createServer(options, function(req, res) {
+      console.log('********* REQUEST');
+      res.writeHead(200, {});
+      res.end();
+    });
+
+    sslServer.listen(9876, function() {
+      done();
+    });
+
+    //sslServer.on('request', function(req, res) {
+    //  debugger;
+    //  res.writeHead(200, {});
+    //  res.end();
+    //});
   });
 
   after(function(done) {
@@ -50,10 +82,23 @@ describe('Outbound HTTP Logger Tests', function() {
       var logger = OutboundHttpLogger.create();
       OutboundHttpLogger.enable();
 
-      http.get('http://localhost:9000', function(res) {
-        res.resume();
-        done();
-      })
+      request.get('http://localhost:9000')
+        .end(function(err, res) {
+          done(err);
+        });
+    });
+  });
+
+  describe('HTTPS GET Request', function() {
+    it('should log a GET request', function(done) {
+      var logger = OutboundHttpLogger.create();
+      OutboundHttpLogger.enable();
+
+      request.get('https://localhost:9876')
+        .end(function(err, res) {
+          debugger;
+          done(err);
+        });
     });
   });
 
