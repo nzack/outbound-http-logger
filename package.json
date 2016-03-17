@@ -1,7 +1,6 @@
 {
   "name": "outbound-http-logger",
   "version": "1.0.0",
-  "private": true,
   "main": "./index",
   "scripts": {
     "test": "mocha --recursive tests",
