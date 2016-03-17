@@ -82,7 +82,7 @@ describe('Outbound HTTP Logger Tests', function() {
 
   describe('GET Request', function() {
     it('should log a GET request', function(done) {
-      var logger = OutboundHttpLogger.create();
+      var logger = OutboundHttpLogger.create({ name: 'Test Logger'});
       OutboundHttpLogger.enable();
 
       request.get('http://localhost:9000')
@@ -95,7 +95,7 @@ describe('Outbound HTTP Logger Tests', function() {
 
   describe('HTTPS GET Request', function() {
     it('should log a GET request', function(done) {
-      var logger = OutboundHttpLogger.create();
+      var logger = OutboundHttpLogger.create({ name: 'Test Logger'});
       OutboundHttpLogger.enable();
 
       request.get('https://localhost:9876')
