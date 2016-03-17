@@ -34,9 +34,12 @@ describe('Outbound HTTP Logger Tests', function() {
       cert: fs.readFileSync('./server/rsa-server.crt')
     };
     sslServer = https.createServer(options, function(req, res) {
-      console.log('********* REQUEST');
+      var body = JSON.stringify({ foo: 'bar'});
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('transfer-encoding', '');
+      res.setHeader('Content-Length', body.length);
       res.writeHead(200, {});
-      res.end();
+      res.end(body);
     });
 
     sslServer.listen(9876, function() {
@@ -72,7 +75,7 @@ describe('Outbound HTTP Logger Tests', function() {
       assert.equal(options.requestHeaders, true);
       assert.equal(options.requestJsonBody, true);
       assert.equal(options.responseHeaders, true);
-      assert.equal(options.responseJsonBody, false);
+      assert.equal(options.responseJsonBody, true);
       assert.isDefined(options.formatter);
     });
   });
@@ -83,6 +86,7 @@ describe('Outbound HTTP Logger Tests', function() {
       OutboundHttpLogger.enable();
 
       request.get('http://localhost:9000')
+        .send({ foo: 'bar' })
         .end(function(err, res) {
           done(err);
         });
@@ -95,8 +99,8 @@ describe('Outbound HTTP Logger Tests', function() {
       OutboundHttpLogger.enable();
 
       request.get('https://localhost:9876')
+        .send({ foo: 'bar' })
         .end(function(err, res) {
-          debugger;
           done(err);
         });
     });
