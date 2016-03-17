@@ -12,7 +12,7 @@ Or slightly longer:
 var OutboundHttpLogger = require('outbound-http-logger');
 var logger = OutboundHttpLogger.create();
 
-// Global enable logging
+// Global enable logging -- ** MUST do this
 OutboundHttpLogger.enable();
 
 // Global disable logging
@@ -41,3 +41,5 @@ var logger = OutboundHttpLogger.create({
 ```
 
 `urlMatcher` can be any regex run on the URL... i.e. `/google.com/`
+
+Lots todo.. this is just initial release.
