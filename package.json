@@ -7,6 +7,7 @@
     "test-debug": "mocha debug --recursive --timeout 9999999 tests"
   },
   "dependencies": {
+    "debug": "^2.2.0",
     "json-colorz": "^0.2.3",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
