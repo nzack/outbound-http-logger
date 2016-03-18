@@ -7,8 +7,6 @@ var https = require('https');
 var url = require('url');
 var request = require('superagent');
 
-require('longjohn');
-
 const OutboundHttpLogger = require('../lib/outbound-http-logger');
 
 describe('Outbound HTTP Logger Tests', function() {

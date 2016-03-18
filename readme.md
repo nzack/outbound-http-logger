@@ -1,4 +1,4 @@
-Coming soon....
+More documentation coming soon....
 
 Quick usage:
 
@@ -15,6 +15,11 @@ var logger = OutboundHttpLogger.create();
 // Global enable logging -- ** MUST do this
 OutboundHttpLogger.enable();
 
+```
+
+Other stuff:
+
+```
 // Global disable logging
 OutboundHttpLogger.disable();
 
