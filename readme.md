@@ -1,4 +1,6 @@
-More documentation coming soon....
+Utility for logging HTTP requests.
+
+![Sample Capture](https://raw.githubusercontent.com/nzack/readme-images/master/outbound-http-logger/sample-capture.png)
 
 Quick usage:
 
