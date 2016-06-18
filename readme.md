@@ -1,11 +1,13 @@
 Utility for logging HTTP requests.
 
-![Sample Capture](https://raw.githubusercontent.com/nzack/readme-images/master/outbound-http-logger/sample-capture.png)
+<img src="https://raw.githubusercontent.com/nzack/readme-images/master/outbound-http-logger/sample-capture.png" width="389" height="766" />
 
 Quick usage:
 
 ```
 var OutboundHttpLogger = require('outbound-http-logger');
+OutboundHttpLogger.go();
+// or
 OutboundHttpLogger.quickstartLogEverything();
 ```
 
