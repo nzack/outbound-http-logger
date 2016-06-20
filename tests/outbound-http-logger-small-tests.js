@@ -138,6 +138,31 @@ describe('Outbound HTTP Logger Tests', function() {
           done();
         });
     });
+
+    it('should generate stats for mulitple requests', function(done) {
+      let count = 10;
+      OutboundHttpLogger.clear();
+      var logger = OutboundHttpLogger.create({ name: 'Test Logger'});
+      OutboundHttpLogger.enable();
+
+      let promises = [];
+      for (var i = 0; i < count; i++) {
+        promises.push(makeRequest('https://localhost:9876'));
+        promises.push(makeRequest('https://localhost:9876/bar'));
+        promises.push(makeRequest('http://localhost:9000'));
+        promises.push(makeRequest('http://localhost:9000/foo'));
+      }
+
+      Promise.all(promises)
+        .then(() => {
+          let stats = OutboundHttpLogger.stats();
+          OutboundHttpLogger.printStats();
+          assert.equal(stats.count, promises.length);
+          assert.equal(stats.urls['https://localhost:9876/'], count);
+          assert.equal(Object.keys(stats.urls).length, 4);
+          done();
+        });
+    });
   });
 
 });
