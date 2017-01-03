@@ -1,3 +1,5 @@
+* 1.0.3
+  * Handles a frozen string, which happens when using new relic in certain cases
 * 1.0.2
   * Fixes printing of headers
   * Fixes printing of stats
